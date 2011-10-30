@@ -55,6 +55,8 @@ open FILE, '>', $opt_o or die 'Unable to open bref.atom : $!';
 
 $feed->print(\*FILE);
 
+close FILE;
+
 sub check_rubrique {
     my ($t, $elt) = @_;
     if($entry_number < 20) {
@@ -70,8 +72,8 @@ sub check_rubrique {
             my $haut_debit = $elt->first_descendant('HAUT_DEBIT');
             my $hd         = $elt->first_descendant('HD');
  
-            my $content = 'Bas d&eacute;bit        : <a href="'.$bas_debit->text_only().'">'.$bas_debit->text_only().'</a><br>'.
-                          'Haut d&eacute;bit       : <a href="'.$haut_debit->text_only().'">'.$haut_debit->text_only().'</a><br>'.
+            my $content = 'Bas d&eacute;bit        : <a href="'.$bas_debit->text_only().'">'.$bas_debit->text_only().'</a><br/>'.
+                          'Haut d&eacute;bit       : <a href="'.$haut_debit->text_only().'">'.$haut_debit->text_only().'</a><br/>'.
                           'Haute d&eacute;finition : <a href="'.$hd->text_only().'">'.$hd->text_only().'</a>';
  
             $date = $date->text_only();
@@ -81,7 +83,6 @@ sub check_rubrique {
             $feed->add_entry(
                 title    => $titre->text_only(),
                 link     => 'http://www.canalplus.fr/c-divertissement/pid3848-c-bref.html?vid='.$id->text_only(),
-                summary  => $titre->text_only(),
                 updated  => $date,
                 category => 'Atom',
                 content  => $content,
