@@ -35,6 +35,7 @@ my $feed = XML::Atom::SimpleFeed->new(
     link    => { rel => 'self', href => 'http://www.fiat-tux.fr/bref.atom', },
     icon    => 'http://www.fiat-tux.fr/favicon.ico',
     author  => 'Bref',
+    id      => 'http://www.canalplus.fr/c-divertissement/pid3848-c-bref.html',
 );
 
 my $flux_xml = get('http://www.canalplus.fr/rest/bootstrap.php?/bigplayer/search/bref');
@@ -83,6 +84,7 @@ sub check_rubrique {
             $feed->add_entry(
                 title    => $titre->text_only(),
                 link     => 'http://www.canalplus.fr/c-divertissement/pid3848-c-bref.html?vid='.$id->text_only(),
+                id       => 'http://www.canalplus.fr/c-divertissement/pid3848-c-bref.html?vid='.$id->text_only(),
                 updated  => $date,
                 category => 'Atom',
                 content  => $content,
