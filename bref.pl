@@ -44,7 +44,7 @@ my $parser = XML::Twig->new();
 
 $parser->setTwigHandlers(
     {
-        'VIDEO/MEDIA' => \&check_rubrique,
+        'VIDEO' => \&check_rubrique,
     }
 );
 
@@ -61,13 +61,12 @@ close FILE;
 sub check_rubrique {
     my ($t, $elt) = @_;
     if($entry_number < 20) {
-        my $video = $elt->parent();
-        my $rubrique = $video->first_descendant('RUBRIQUE');
+        my $rubrique = $elt->first_descendant('RUBRIQUE');
         if ($rubrique->text_only() eq 'BREF'){
-            my $id    = $video->first_descendant('ID');
-            my $date  = $video->first_descendant('DATE');
-            my $heure = $video->first_descendant('HEURE');
-            my $titre = $video->first_descendant('TITRE');
+            my $id    = $elt->first_descendant('ID');
+            my $date  = $elt->first_descendant('DATE');
+            my $heure = $elt->first_descendant('HEURE');
+            my $titre = $elt->first_descendant('TITRE');
  
             my $bas_debit  = $elt->first_descendant('BAS_DEBIT');
             my $haut_debit = $elt->first_descendant('HAUT_DEBIT');
